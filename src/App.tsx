@@ -15,17 +15,13 @@ import Profile from "./pages/Profile";
 import Transfer from "./pages/Transfer";
 import Movements from "./pages/Movements";
 import Statistics from "./pages/Statistics";
-import ApiConfig from "./pages/ApiConfig";
-import WebAccess from "./pages/WebAccess";
 import Settings from "./pages/Settings";
-import ScanQR from "./pages/ScanQR";
 import ConfirmPay from "./pages/ConfirmPay";
 import SuccessPay from "./pages/SuccessPay";
 import ErrorPay from "./pages/ErrorPay";
 import LinkedDevices from "./pages/LinkedDevices";
 import ShareCVU from "./pages/ShareCVU";
 import Menu from "./pages/Menu";
-import ApisWiki from "./pages/ApisWiki";
 import Terms from "./pages/Terms";
 import Privacy from "./pages/Privacy";
 import About from "./pages/About";
@@ -53,17 +49,13 @@ const App = () => (
               <Route path="/transfer" element={<Transfer />} />
               <Route path="/movements" element={<Movements />} />
               <Route path="/statistics" element={<Statistics />} />
-              <Route path="/api-config" element={<ApiConfig />} />
-              <Route path="/web-access" element={<WebAccess />} />
               <Route path="/settings" element={<Settings />} />
-              <Route path="/scan-qr" element={<ScanQR />} />
               <Route path="/confirm-pay" element={<ConfirmPay />} />
               <Route path="/success-pay" element={<SuccessPay />} />
               <Route path="/error-pay" element={<ErrorPay />} />
               <Route path="/linked-devices" element={<LinkedDevices />} />
               <Route path="/share-cvu" element={<ShareCVU />} />
               <Route path="/menu" element={<Menu />} />
-              <Route path="/apis-wiki" element={<ApisWiki />} />
               <Route path="/terms" element={<Terms />} />
               <Route path="/privacy" element={<Privacy />} />
               <Route path="/about" element={<About />} />

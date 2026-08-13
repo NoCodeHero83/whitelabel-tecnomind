@@ -1,7 +1,7 @@
 import { DateRange } from "react-day-picker";
 import DateRangeFilter from "./DateRangeFilter";
 
-export type FilterType = "todos" | "ingresos" | "egresos" | "fechas";
+export type FilterType = "todos" | "pagos" | "otc" | "fechas";
 
 interface FilterChipsProps {
   activeFilter: FilterType;
@@ -12,8 +12,8 @@ interface FilterChipsProps {
 
 const filters: { id: FilterType; label: string }[] = [
   { id: "todos", label: "Todos" },
-  { id: "ingresos", label: "Ingresos" },
-  { id: "egresos", label: "Egresos" },
+  { id: "pagos", label: "Pagos" },
+  { id: "otc", label: "OTC" },
 ];
 
 const FilterChips = ({

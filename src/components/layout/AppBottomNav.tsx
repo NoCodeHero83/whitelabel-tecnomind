@@ -1,4 +1,4 @@
-import { Home, ArrowLeftRight, QrCode, Receipt, User } from "lucide-react";
+import { Home, Globe, Receipt, Coins, User } from "lucide-react";
 import { useNavigate, useLocation } from "react-router-dom";
 import { LucideIcon } from "lucide-react";
 import { cn } from "@/lib/utils";
@@ -58,9 +58,9 @@ const NavItem = ({ icon: Icon, label, isActive, isCenter, onClick }: NavItemProp
 
 const navItems = [
   { icon: Home, label: "Inicio", path: "/dashboard" },
-  { icon: ArrowLeftRight, label: "Transferir", path: "/transfer" },
-  { icon: QrCode, label: "QR", path: "/scan-qr", isCenter: true },
-  { icon: Receipt, label: "Movimientos", path: "/movements" },
+  { icon: Globe, label: "Pagos", path: "/transfer" },
+  { icon: Receipt, label: "Historial", path: "/movements", isCenter: true },
+  { icon: Coins, label: "OTC", path: "/statistics" },
   { icon: User, label: "Perfil", path: "/profile" },
 ];
 

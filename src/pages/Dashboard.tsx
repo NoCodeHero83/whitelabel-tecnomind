@@ -5,10 +5,12 @@ import BalanceCard from "@/components/dashboard/BalanceCard";
 import QuickActions from "@/components/dashboard/QuickActions";
 import TransactionsList from "@/components/dashboard/TransactionsList";
 import { useAuth } from "@/contexts/AuthContext";
+import { getOperationSummary } from "@/data/mockOperations";
 
 const Dashboard = () => {
   const { user } = useAuth();
   const firstName = user?.name.split(" ")[0] || "Usuario";
+  const summary = getOperationSummary();
 
   return (
     <AppLayout>
@@ -31,15 +33,18 @@ const Dashboard = () => {
         </div>
       </div>
 
-      {/* Balance Card */}
+      {/* Summary Card */}
       <section className="px-6 py-4">
-        <BalanceCard />
+        <BalanceCard
+          label="En operaciones activas"
+          value={summary.activeTotalFormatted}
+        />
       </section>
 
       {/* Quick Actions */}
       <QuickActions />
 
-      {/* Transactions List */}
+      {/* Operations List */}
       <TransactionsList />
     </AppLayout>
   );

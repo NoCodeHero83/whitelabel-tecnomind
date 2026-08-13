@@ -21,6 +21,3 @@ export const SIDEBAR_COLLAPSED_WIDTH = 64;
 // Formateo
 export const CURRENCY_LOCALE = "es-AR";
 export const CURRENCY_CODE = "ARS";
-
-// API
-export const API_USERNAME_PREFIX = "mag_";

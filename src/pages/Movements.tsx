@@ -7,13 +7,19 @@ import AppLayout from "@/components/layout/AppLayout";
 import GlobalHeader from "@/components/layout/GlobalHeader";
 import SearchBar from "@/components/movements/SearchBar";
 import FilterChips, { FilterType } from "@/components/movements/FilterChips";
-import TransactionGroup, { Transaction } from "@/components/movements/TransactionGroup";
-import TransactionReceiptModal, { TransactionDetails } from "@/components/movements/TransactionReceiptModal";
-import { useAuth } from "@/contexts/AuthContext";
-import { allTransactions, dateOrder } from "@/data/mockTransactions";
-import { formatBalance } from "@/lib/formatters";
-import { mockBalance } from "@/data/mockBalance";
+import OperationRow from "@/components/operations/OperationRow";
+import PaymentDetailModal from "@/components/operations/PaymentDetailModal";
+import OtcDetailModal from "@/components/operations/OtcDetailModal";
 import EmptyState from "@/components/ui/empty-state";
+import { useAuth } from "@/contexts/AuthContext";
+import {
+  historyOperations,
+  historyDateOrder,
+  mockPayments,
+  mockOtcOperations,
+  getOperationSummary,
+} from "@/data/mockOperations";
+import type { OperationListItem } from "@/types";
 
 // Helper to parse dateGroup to actual Date for filtering
 const parseDateGroup = (dateGroup: string): Date => {
@@ -36,7 +42,10 @@ const Movements = () => {
   const [searchQuery, setSearchQuery] = useState("");
   const [activeFilter, setActiveFilter] = useState<FilterType>("todos");
   const [dateRange, setDateRange] = useState<DateRange | undefined>(undefined);
-  const [selectedTransaction, setSelectedTransaction] = useState<TransactionDetails | null>(null);
+  const [selectedPaymentId, setSelectedPaymentId] = useState<string | null>(null);
+  const [selectedOtcId, setSelectedOtcId] = useState<string | null>(null);
+
+  const summary = getOperationSummary();
 
   // Clear filters when leaving the page
   useEffect(() => {
@@ -46,27 +55,27 @@ const Movements = () => {
     };
   }, [location.pathname]);
 
-  const filteredTransactions = useMemo(() => {
-    let filtered = allTransactions;
+  const filteredOperations = useMemo(() => {
+    let filtered = historyOperations;
 
-    // Filter by type
-    if (activeFilter === "ingresos") {
-      filtered = filtered.filter((t) => t.type === "income");
-    } else if (activeFilter === "egresos") {
-      filtered = filtered.filter((t) => t.type === "expense");
+    // Filter by kind
+    if (activeFilter === "pagos") {
+      filtered = filtered.filter((t) => t.kind === "payment");
+    } else if (activeFilter === "otc") {
+      filtered = filtered.filter((t) => t.kind === "otc");
     }
 
     // Filter by date range
     if (activeFilter === "fechas" && dateRange?.from) {
       filtered = filtered.filter((t) => {
-        const transactionDate = parseDateGroup(t.dateGroup);
+        const operationDate = parseDateGroup(t.dateGroup);
         if (dateRange.to) {
-          return isWithinInterval(transactionDate, {
+          return isWithinInterval(operationDate, {
             start: dateRange.from!,
             end: dateRange.to,
           });
         }
-        return transactionDate.toDateString() === dateRange.from!.toDateString();
+        return operationDate.toDateString() === dateRange.from!.toDateString();
       });
     }
 
@@ -75,8 +84,10 @@ const Movements = () => {
       const query = searchQuery.toLowerCase();
       filtered = filtered.filter(
         (t) =>
-          t.name.toLowerCase().includes(query) ||
-          t.category.toLowerCase().includes(query) ||
+          t.title.toLowerCase().includes(query) ||
+          t.reference.toLowerCase().includes(query) ||
+          t.statusText.toLowerCase().includes(query) ||
+          t.subtitle.toLowerCase().includes(query) ||
           t.amount.toLowerCase().includes(query) ||
           t.dateGroup.toLowerCase().includes(query)
       );
@@ -85,37 +96,51 @@ const Movements = () => {
     return filtered;
   }, [activeFilter, searchQuery, dateRange]);
 
-  const groupedTransactions = useMemo(() => {
-    const groups: Record<string, Transaction[]> = {};
-    filteredTransactions.forEach((t) => {
+  const groupedOperations = useMemo(() => {
+    const groups: Record<string, OperationListItem[]> = {};
+    filteredOperations.forEach((t) => {
       if (!groups[t.dateGroup]) {
         groups[t.dateGroup] = [];
       }
       groups[t.dateGroup].push(t);
     });
     return groups;
-  }, [filteredTransactions]);
+  }, [filteredOperations]);
 
-  const handleTransactionClick = (transaction: Transaction & { dateGroup: string }) => {
-    setSelectedTransaction(transaction as TransactionDetails);
+  const handleOperationClick = (operation: OperationListItem) => {
+    if (operation.kind === "payment") {
+      setSelectedPaymentId(operation.id);
+    } else {
+      setSelectedOtcId(operation.id);
+    }
   };
+
+  const selectedPayment = useMemo(
+    () => mockPayments.find((p) => p.id === selectedPaymentId) || null,
+    [selectedPaymentId]
+  );
+
+  const selectedOtc = useMemo(
+    () => mockOtcOperations.find((o) => o.id === selectedOtcId) || null,
+    [selectedOtcId]
+  );
 
   return (
     <AppLayout>
       <GlobalHeader 
-        title="Movimientos" 
+        title="Historial" 
         showBackButton
         showAvatar
         userName={user?.name || "Usuario"}
       />
 
-      {/* Balance display */}
+      {/* Summary display */}
       <div className="px-4 py-4 border-b border-border bg-card/50">
         <div className="flex items-center justify-between">
           <div>
-            <p className="text-sm text-muted-foreground mb-1">Saldo disponible</p>
+            <p className="text-sm text-muted-foreground mb-1">Operaciones activas</p>
             <p className="text-2xl font-bold text-foreground">
-              {showBalance ? formatBalance(mockBalance.available) : "••••••"}
+              {showBalance ? summary.activeCount : "••••••"}
             </p>
           </div>
           <button 
@@ -142,46 +167,58 @@ const Movements = () => {
         />
       </div>
 
-      {/* Transaction list */}
+      {/* Operations list */}
       <div className="flex-1 overflow-y-auto overflow-x-hidden px-4 pt-2 bg-background">
-        {dateOrder.map((dateGroup) => {
-          const transactions = groupedTransactions[dateGroup];
-          if (!transactions || transactions.length === 0) return null;
+        {historyDateOrder.map((dateGroup) => {
+          const operations = groupedOperations[dateGroup];
+          if (!operations || operations.length === 0) return null;
           return (
-            <TransactionGroup
-              key={dateGroup}
-              dateLabel={dateGroup}
-              transactions={transactions}
-              onTransactionClick={handleTransactionClick}
-            />
+            <div key={dateGroup} className="mb-6">
+              <div className="sticky top-0 z-10 py-2 mb-1 bg-background/90 backdrop-blur-sm w-full">
+                <h3 className="text-muted-foreground text-xs font-bold uppercase tracking-wider">
+                  {dateGroup}
+                </h3>
+              </div>
+              <div className="flex flex-col">
+                {operations.map((operation) => (
+                  <OperationRow
+                    key={operation.id}
+                    icon={operation.icon}
+                    title={operation.title}
+                    subtitle={operation.subtitle}
+                    amount={operation.amount}
+                    amountTone={operation.amountTone}
+                    statusText={operation.statusText}
+                    statusTone={operation.statusTone}
+                    onClick={() => handleOperationClick(operation)}
+                  />
+                ))}
+              </div>
+            </div>
           );
         })}
 
-        {filteredTransactions.length === 0 && (
+        {filteredOperations.length === 0 && (
           <EmptyState
             icon={Receipt}
-            title="Sin movimientos"
+            title="Sin operaciones"
             description={
               searchQuery || activeFilter !== "todos"
                 ? "No encontramos resultados con esos filtros"
-                : "Aún no tienes movimientos registrados"
+                : "Aún no tienes operaciones registradas"
             }
           />
         )}
-
-        {filteredTransactions.length > 0 && (
-          <div className="py-4 flex justify-center">
-            <span className="text-muted-foreground text-2xl font-black opacity-20">
-              . . .
-            </span>
-          </div>
-        )}
       </div>
 
-      {/* Transaction Receipt Modal */}
-      <TransactionReceiptModal
-        transaction={selectedTransaction}
-        onClose={() => setSelectedTransaction(null)}
+      {/* Detail modals */}
+      <PaymentDetailModal
+        payment={selectedPayment}
+        onClose={() => setSelectedPaymentId(null)}
+      />
+      <OtcDetailModal
+        operation={selectedOtc}
+        onClose={() => setSelectedOtcId(null)}
       />
     </AppLayout>
   );

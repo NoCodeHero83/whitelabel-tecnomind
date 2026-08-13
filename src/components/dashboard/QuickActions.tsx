@@ -1,16 +1,21 @@
-import { Send, BarChart3, Share2, Receipt } from "lucide-react";
+import { Globe, Coins, Receipt } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import QuickActionButton from "./QuickActionButton";
 
 const actions = [
-  { icon: Send, label: "Transferir", isPrimary: false, path: "/transfer", desktopOnly: false },
-  { icon: Receipt, label: "Movimientos", isPrimary: false, path: "/movements", desktopOnly: true },
-  { icon: BarChart3, label: "Estadísticas", isPrimary: false, path: "/statistics", desktopOnly: false },
-  { icon: Share2, label: "Compartir CVU", isPrimary: false, path: "/share-cvu", desktopOnly: false },
+  { icon: Globe, label: "Pagos", isPrimary: false, path: "/transfer", desktopOnly: false },
+  { icon: Coins, label: "OTC", isPrimary: false, path: "/statistics", desktopOnly: false },
+  { icon: Receipt, label: "Historial", isPrimary: false, path: "/movements", desktopOnly: true },
 ];
 
 const QuickActions = () => {
   const navigate = useNavigate();
+
+  const handleClick = (path: string | null) => {
+    if (path) {
+      navigate(path);
+    }
+  };
 
   return (
     <section className="px-6 py-4">
@@ -24,7 +29,7 @@ const QuickActions = () => {
               icon={action.icon}
               label={action.label}
               isPrimary={action.isPrimary}
-              onClick={() => navigate(action.path)}
+              onClick={() => handleClick(action.path)}
             />
           </div>
         ))}

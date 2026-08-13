@@ -1,4 +1,4 @@
-import { Home, ArrowLeftRight, Receipt, BarChart3, Code, User, Settings, LogOut, PanelLeftClose } from "lucide-react";
+import { Home, Globe, Receipt, Coins, Code, User, Settings, LogOut, PanelLeftClose } from "lucide-react";
 import { useNavigate, useLocation } from "react-router-dom";
 import { LucideIcon } from "lucide-react";
 import Logo from "@/components/Logo";
@@ -36,9 +36,9 @@ const SidebarItem = ({ icon: Icon, label, isActive, collapsed, onClick }: Sideba
 
 const menuItems = [
   { icon: Home, label: "Inicio", path: "/dashboard" },
-  { icon: ArrowLeftRight, label: "Transferir", path: "/transfer" },
-  { icon: Receipt, label: "Movimientos", path: "/movements" },
-  { icon: BarChart3, label: "Estadísticas", path: "/statistics" },
+  { icon: Globe, label: "Pagos", path: "/transfer" },
+  { icon: Receipt, label: "Historial", path: "/movements" },
+  { icon: Coins, label: "OTC", path: "/statistics" },
   { icon: User, label: "Perfil", path: "/profile" },
 ];
 

@@ -81,7 +81,7 @@ const ForgotPassword = () => {
                 Recuperar Contraseña
               </h2>
               <p className="text-muted-foreground text-sm text-center mb-8">
-                Ingresa tu correo electrónico y te enviaremos un enlace para restablecer tu PIN.
+                Ingresa tu correo electrónico y te enviaremos un enlace para restablecer tu contraseña o PIN.
               </p>
 
               {/* Email Input */}
@@ -144,7 +144,7 @@ const ForgotPassword = () => {
                 {email}
               </p>
               <p className="text-muted-foreground text-xs mb-8 px-4">
-                Revisa tu bandeja de entrada y sigue las instrucciones para restablecer tu PIN. Si no lo encuentras, revisa la carpeta de spam.
+                Revisa tu bandeja de entrada y sigue las instrucciones para restablecer tu contraseña o PIN. Si no lo encuentras, revisa la carpeta de spam.
               </p>
 
               {/* Actions */}

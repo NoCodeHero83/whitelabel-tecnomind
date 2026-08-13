@@ -1,17 +1,14 @@
 import { 
   Home, 
-  ArrowLeftRight, 
+  Globe, 
   Receipt, 
-  BarChart3, 
-  Code, 
+  Coins, 
   User, 
   Settings, 
   LogOut, 
-  QrCode,
   Smartphone,
   Share2,
   ChevronRight,
-  Monitor,
   LucideIcon
 } from "lucide-react";
 import { useNavigate, useLocation } from "react-router-dom";
@@ -65,16 +62,13 @@ const MenuItem = ({ icon: Icon, label, description, isActive, onClick, variant =
 
 const mainMenuItems = [
   { icon: Home, label: "Inicio", description: "Panel principal", path: "/dashboard" },
-  { icon: ArrowLeftRight, label: "Transferir", description: "Enviar dinero", path: "/transfer" },
-  { icon: Receipt, label: "Movimientos", description: "Historial de transacciones", path: "/movements" },
-  { icon: BarChart3, label: "Estadísticas", description: "Análisis de gastos", path: "/statistics" },
+  { icon: Globe, label: "Pagos", description: "Seguimiento de pagos internacionales", path: "/transfer" },
+  { icon: Receipt, label: "Historial", description: "Pagos y operaciones OTC", path: "/movements" },
+  { icon: Coins, label: "OTC", description: "Seguimiento de operaciones OTC", path: "/statistics" },
   { icon: User, label: "Perfil", description: "Tu información", path: "/profile" },
-  { icon: Code, label: "API", description: "Configuración de API", path: "/api-config" },
-  { icon: Monitor, label: "Acceso Web", description: "Acceso desde navegador", path: "/web-access" },
 ];
 
 const mobileOnlyItems = [
-  { icon: QrCode, label: "Escanear QR", description: "Pagar con código QR", path: "/scan-qr" },
   { icon: Share2, label: "Compartir CVU", description: "Compartir tu información", path: "/share-cvu" },
   { icon: Smartphone, label: "Dispositivos", description: "Dispositivos vinculados", path: "/linked-devices" },
 ];

@@ -3,10 +3,15 @@ import { Eye, EyeOff } from "lucide-react";
 import { mockBalance } from "@/data/mockBalance";
 import { formatBalance } from "@/lib/formatters";
 
-const BalanceCard = () => {
+interface BalanceCardProps {
+  label?: string;
+  value?: string;
+}
+
+const BalanceCard = ({ label = "Saldo Disponible", value }: BalanceCardProps) => {
   const [showBalance, setShowBalance] = useState(true);
 
-  const balance = formatBalance(mockBalance.available);
+  const balance = value ?? formatBalance(mockBalance.available);
 
   // Ajusta el tamaño del texto según la cantidad de caracteres
   const balanceFontSize = useMemo(() => {
@@ -23,7 +28,7 @@ const BalanceCard = () => {
       <div className="absolute top-0 right-0 -mt-8 -mr-8 w-32 h-32 bg-accent/5 rounded-full blur-2xl pointer-events-none" />
       <div className="absolute bottom-0 left-0 -mb-8 -ml-8 w-32 h-32 bg-accent/5 rounded-full blur-2xl pointer-events-none" />
 
-      <p className="text-muted-foreground text-sm font-medium mb-2">Saldo Disponible</p>
+      <p className="text-muted-foreground text-sm font-medium mb-2">{label}</p>
       
       <div className="flex items-center gap-3 mb-1">
         <h2 className={`${balanceFontSize} font-bold tracking-tight text-foreground whitespace-nowrap`}>

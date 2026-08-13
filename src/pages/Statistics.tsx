@@ -1,120 +1,90 @@
-import { useState, useMemo } from "react";
-import { format, subDays, subMonths } from "date-fns";
-import { es } from "date-fns/locale";
+import { useState } from "react";
+import { Coins } from "lucide-react";
 import AppLayout from "@/components/layout/AppLayout";
 import GlobalHeader from "@/components/layout/GlobalHeader";
-import TimeRangeTabs from "@/components/statistics/TimeRangeTabs";
-import CustomDateRangePicker from "@/components/statistics/CustomDateRangePicker";
-import SummaryCards from "@/components/statistics/SummaryCards";
-import BalanceChart from "@/components/statistics/BalanceChart";
+import OperationRow from "@/components/operations/OperationRow";
+import OtcDetailModal from "@/components/operations/OtcDetailModal";
+import EmptyState from "@/components/ui/empty-state";
 import { useAuth } from "@/contexts/AuthContext";
-import { generateChartData, generateSummaryData } from "@/data/statisticsData";
+import { mockOtcOperations, otcListItems } from "@/data/mockOperations";
+import type { OtcOperation } from "@/types";
 
-const Statistics = () => {
+const OtcTracking = () => {
   const { user } = useAuth();
-  const [selectedRange, setSelectedRange] = useState("1d");
-  const [startDate, setStartDate] = useState<Date | undefined>(undefined);
-  const [endDate, setEndDate] = useState<Date | undefined>(undefined);
-  const [appliedCustomRange, setAppliedCustomRange] = useState<{ start: Date; end: Date } | null>(null);
+  const [selectedOperation, setSelectedOperation] = useState<OtcOperation | null>(null);
 
-  const dateRange = useMemo(() => {
-    const now = new Date();
-    
-    switch (selectedRange) {
-      case "1d":
-        return { start: subDays(now, 1), end: now };
-      case "7d":
-        return { start: subDays(now, 7), end: now };
-      case "1m":
-        return { start: subMonths(now, 1), end: now };
-      case "custom":
-        if (appliedCustomRange) {
-          return { start: appliedCustomRange.start, end: appliedCustomRange.end };
-        }
-        return { start: subDays(now, 7), end: now };
-      default:
-        return { start: subDays(now, 1), end: now };
-    }
-  }, [selectedRange, appliedCustomRange]);
+  const activeCount = mockOtcOperations.filter((o) => o.stage !== "completed").length;
 
-  const chartData = useMemo(() => {
-    return generateChartData(dateRange.start, dateRange.end);
-  }, [dateRange]);
-
-  const summaryData = useMemo(() => {
-    return generateSummaryData(
-      selectedRange, 
-      appliedCustomRange?.start, 
-      appliedCustomRange?.end
-    );
-  }, [selectedRange, appliedCustomRange]);
-
-  const currentBalance = chartData[chartData.length - 1]?.value || 0;
-
-  const handleRangeChange = (rangeId: string) => {
-    setSelectedRange(rangeId);
-    if (rangeId !== "custom") {
-      setStartDate(undefined);
-      setEndDate(undefined);
-      setAppliedCustomRange(null);
-    }
-  };
-
-  const handleApplyCustomRange = () => {
-    if (startDate && endDate) {
-      setAppliedCustomRange({ start: startDate, end: endDate });
-    }
-  };
-
-  const getRangeLabel = () => {
-    if (selectedRange === "custom" && appliedCustomRange) {
-      return `${format(appliedCustomRange.start, "d MMM", { locale: es })} - ${format(appliedCustomRange.end, "d MMM", { locale: es })}`;
-    }
-    const labels: Record<string, string> = {
-      "1d": "Últimas 24 horas",
-      "7d": "Últimos 7 días",
-      "1m": "Último mes",
-    };
-    return labels[selectedRange] || "";
+  const handleOpen = (id: string) => {
+    const operation = mockOtcOperations.find((o) => o.id === id) || null;
+    setSelectedOperation(operation);
   };
 
   return (
     <AppLayout>
       <GlobalHeader 
-        title="Estadísticas" 
+        title="Operaciones OTC" 
         showBackButton
         showAvatar
         userName={user?.name || "Usuario"}
       />
 
-      <div className="p-4 space-y-5 pb-24 md:pb-8">
-        <TimeRangeTabs 
-          selectedRange={selectedRange} 
-          onRangeChange={handleRangeChange} 
-        />
+      <main className="flex-1 w-full max-w-md mx-auto flex flex-col px-4 pt-4 pb-8">
+        {/* Header summary */}
+        <div className="mb-4">
+          <p className="text-sm text-muted-foreground mb-1">
+            Seguimiento de tus compras y ventas de criptomonedas
+          </p>
+          <div className="flex items-center gap-2">
+            <div className="flex items-center gap-2 rounded-full bg-accent/10 pl-2 pr-4 py-1 border border-accent/20">
+              <Coins className="size-4 text-accent" />
+              <span className="text-accent text-xs font-medium uppercase tracking-wide">
+                {activeCount} operac{activeCount === 1 ? "ión" : "iones"} en curso
+              </span>
+            </div>
+          </div>
+        </div>
 
-        {selectedRange === "custom" && (
-          <CustomDateRangePicker
-            startDate={startDate}
-            endDate={endDate}
-            onStartDateChange={setStartDate}
-            onEndDateChange={setEndDate}
-            onApply={handleApplyCustomRange}
-          />
-        )}
+        {/* OTC list */}
+        <div className="bg-card rounded-2xl border border-border overflow-hidden px-4">
+          {otcListItems.length > 0 ? (
+            <div className="flex flex-col">
+              {otcListItems.map((operation) => (
+                <OperationRow
+                  key={operation.id}
+                  icon={operation.icon}
+                  title={operation.title}
+                  subtitle={operation.subtitle}
+                  amount={operation.amount}
+                  amountTone={operation.amountTone}
+                  statusText={operation.statusText}
+                  statusTone={operation.statusTone}
+                  onClick={() => handleOpen(operation.id)}
+                />
+              ))}
+            </div>
+          ) : (
+            <EmptyState
+              icon={Coins}
+              title="Sin operaciones OTC"
+              description="Aún no tienes operaciones OTC solicitadas"
+              className="py-8"
+            />
+          )}
+        </div>
 
-        <SummaryCards data={summaryData} />
+        <p className="text-muted-foreground text-xs mt-4 text-center leading-relaxed">
+          Desde la app podés ver el estado de tus operaciones OTC,
+          el monto entregado y la tasa aplicada.
+        </p>
+      </main>
 
-        <BalanceChart
-          data={chartData}
-          currentBalance={currentBalance}
-          balanceChange={summaryData.balanceChange}
-          rangeLabel={getRangeLabel()}
-          lastUpdated={format(new Date(), "HH:mm", { locale: es })}
-        />
-      </div>
+      <OtcDetailModal
+        operation={selectedOperation}
+        onClose={() => setSelectedOperation(null)}
+      />
     </AppLayout>
   );
 };
 
-export default Statistics;
+export default OtcTracking;

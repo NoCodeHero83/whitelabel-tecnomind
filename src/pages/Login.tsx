@@ -203,23 +203,6 @@ const Login = () => {
                   "Ingresar"
                 )}
               </Button>
-              {/* Mobile: Link to /register */}
-              <button
-                type="button"
-                onClick={() => navigate("/register")}
-                className="text-accent hover:text-accent/80 text-sm font-medium transition-colors md:hidden"
-              >
-                ¿Nuevo usuario? Registrate aquí
-              </button>
-              {/* Desktop: Link to Google Play Store */}
-              <a
-                href="https://play.google.com/store"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="text-accent hover:text-accent/80 text-sm font-medium transition-colors hidden md:block"
-              >
-                ¿Nuevo usuario? Registrate desde la app
-              </a>
               <button
                 type="button"
                 onClick={() => navigate("/forgot-password")}

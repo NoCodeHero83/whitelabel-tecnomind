@@ -1,4 +1,4 @@
-import { Building2, QrCode } from "lucide-react";
+import { Building2 } from "lucide-react";
 
 const SolutionsSection = () => {
   const solutions = [
@@ -7,12 +7,6 @@ const SolutionsSection = () => {
       title: "Tu CVU de Negocios",
       description: "Profesionalizá tu emprendimiento. Obtené un CVU exclusivo para separar tus finanzas personales de la caja de tu empresa.",
       features: ["Sin costo de adhesión", "Activación inmediata", "Panel de control en tiempo real"],
-    },
-    {
-      icon: QrCode,
-      title: "Cobrá con QR Interoperable",
-      description: "Aceptá pagos de cualquier banco o billetera virtual. Acreditación inmediata para que tu negocio siempre tenga liquidez.",
-      features: ["Compatible con todas las billeteras", "Acreditación inmediata", "Comisiones competitivas"],
     }
   ];
 
@@ -34,7 +28,7 @@ const SolutionsSection = () => {
         </div>
 
         {/* Solutions Grid */}
-        <div className="grid md:grid-cols-2 gap-8 max-w-4xl mx-auto items-stretch">
+        <div className="grid gap-8 max-w-2xl mx-auto items-stretch">
           {solutions.map((solution) => (
             <div
               key={solution.title}

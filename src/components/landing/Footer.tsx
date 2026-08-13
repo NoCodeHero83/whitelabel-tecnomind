@@ -5,7 +5,6 @@ const Footer = () => {
   const links = {
     producto: [
       { label: "Billetera Virtual", href: "/login" },
-      { label: "APIs", href: "/apis-wiki" },
     ],
     empresa: [
       { label: "Nosotros", href: "/about" },
