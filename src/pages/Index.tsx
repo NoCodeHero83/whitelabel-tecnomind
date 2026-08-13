@@ -3,7 +3,6 @@ import {
   HeroSection,
   TrustStrip,
   SolutionsSection,
-  StepsSection,
   CapabilitiesSection,
   MisionVisionSection,
   ValueProps,
@@ -19,7 +18,6 @@ const Index = () => {
         <HeroSection />
         <TrustStrip />
         <SolutionsSection />
-        <StepsSection />
         <CapabilitiesSection />
         <MisionVisionSection />
         <ValueProps />

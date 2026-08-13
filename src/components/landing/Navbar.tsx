@@ -40,7 +40,7 @@ const Navbar = ({ variant = "solid" }: NavbarProps) => {
           : "bg-transparent border-b border-transparent"
       )}
     >
-      <div className="container mx-auto px-4 lg:px-8">
+      <div className="max-w-6xl mx-auto px-4 sm:px-6">
         <div className="flex items-center justify-between h-16 lg:h-20">
           <Logo className={cn("ml-0", overlay && !solid && "[&_span]:text-white")} />
 

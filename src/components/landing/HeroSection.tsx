@@ -1,20 +1,15 @@
-import { ArrowRight, CheckCircle2, TrendingUp, ArrowLeftRight } from "lucide-react";
+import { ArrowRight, TrendingUp, ArrowLeftRight, CheckCircle2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { useNavigate } from "react-router-dom";
 import fondoHero from "@/assets/tecnomind-fondo.jpg";
+import Eyebrow from "./Eyebrow";
 
 const HeroSection = () => {
   const navigate = useNavigate();
 
-  const stats = [
-    { value: "+150.000", label: "Operaciones mensuales" },
-    { value: "24/7", label: "Disponibilidad" },
-    { value: "100%", label: "Plataforma digital" },
-  ];
-
   return (
-    <section className="relative min-h-screen overflow-hidden bg-primary">
-      {/* Fondo tecnomind optimizado */}
+    <section className="relative isolation overflow-hidden bg-primary">
+      {/* Fondo tecnomind */}
       <img
         src={fondoHero}
         alt=""
@@ -24,77 +19,49 @@ const HeroSection = () => {
         fetchPriority="high"
         decoding="async"
       />
-
-      {/* Overlay para asegurar contraste de textos */}
+      {/* Tinte de marca + vignette para dejar ver la imagen y mantener contraste */}
+      <div className="absolute inset-0 bg-primary/55 pointer-events-none" aria-hidden />
       <div
-        className="absolute inset-0 bg-[linear-gradient(180deg,rgba(10,37,64,0.86)_0%,rgba(10,37,64,0.72)_45%,rgba(10,37,64,0.9)_100%)]"
+        className="absolute inset-0 bg-[linear-gradient(to_bottom,rgba(10,37,64,0.25),rgba(10,37,64,0.55))] pointer-events-none"
         aria-hidden
       />
-      <div
-        className="absolute inset-0 bg-[linear-gradient(120deg,rgba(10,37,64,0.9)_30%,rgba(10,37,64,0.35)_100%)]"
-        aria-hidden
-      />
+      <div className="absolute -top-[15%] right-[5%] w-[500px] h-[500px] rounded-full bg-accent/15 blur-[60px] pointer-events-none" aria-hidden />
+      <div className="absolute -bottom-[10%] -left-[5%] w-[400px] h-[400px] rounded-full bg-success/10 blur-[60px] pointer-events-none" aria-hidden />
 
-      {/* Glow orbs */}
-      <div className="absolute -top-24 right-[8%] w-[520px] h-[520px] rounded-full bg-accent/20 blur-[110px]" aria-hidden />
-      <div className="absolute -bottom-32 -left-24 w-[480px] h-[480px] rounded-full bg-success/15 blur-[110px]" aria-hidden />
-
-      <div className="container relative z-10 mx-auto px-4 lg:px-8 pt-36 lg:pt-44 pb-24 lg:pb-32">
-        <div className="grid lg:grid-cols-2 gap-14 lg:gap-20 items-center">
+      <div className="relative max-w-6xl mx-auto px-4 sm:px-6 flex flex-col justify-center min-h-[82vh] md:min-h-[90vh] pt-28 md:pt-40 pb-16 sm:pb-20 lg:pb-24">
+        <div className="grid lg:grid-cols-2 lg:gap-14 items-center">
           {/* Copy */}
           <div className="animate-fade-up">
-            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/10 border border-white/15 backdrop-blur-sm">
-              <span className="w-2 h-2 rounded-full bg-success animate-pulse" />
-              <span className="text-xs font-semibold tracking-[0.14em] uppercase text-white/85">
-                Tecnomind · Plataforma financiera digital
-              </span>
-            </div>
-
-            <h1 className="mt-7 text-4xl md:text-5xl xl:text-6xl font-bold text-white tracking-tight leading-[1.08]">
-              La infraestructura financiera que tu negocio merece.
+            <Eyebrow tone="light">tecnomind — Plataforma financiera digital</Eyebrow>
+            <h1 className="mt-6 text-[clamp(2rem,4vw,3.5rem)] font-bold leading-[1.05] text-white max-w-[24ch]">
+              Soluciones financieras para tu negocio
             </h1>
-
-            <p className="mt-6 max-w-xl text-lg md:text-xl text-white/75 leading-relaxed">
-              Gestioná cobros, pagos y transferencias con la mayor velocidad del mercado.
-              Una plataforma robusta y segura, diseñada para la agilidad de los emprendedores argentinos.
+            <p className="mt-6 max-w-lg text-base md:text-lg text-white/70 leading-relaxed">
+              Integramos cobros, pagos y transferencias en una sola plataforma segura, regulada y 100% digital.
             </p>
-
-            {/* CTAs */}
-            <div className="mt-9 flex flex-col sm:flex-row gap-4">
+            <div className="mt-8 flex flex-wrap gap-3">
               <Button
                 variant="hero"
                 size="xl"
                 className="group shadow-accent/40"
                 onClick={() => navigate("/register")}
               >
-                Comenzar ahora
+                Abrí tu cuenta
                 <ArrowRight className="w-5 h-5 transition-transform group-hover:translate-x-1" />
               </Button>
               <a
                 href="#servicios"
-                className="inline-flex h-14 items-center justify-center px-8 rounded-xl text-base font-semibold text-white border border-white/30 hover:bg-white/10 transition-colors"
+                className="inline-flex h-12 items-center px-7 rounded-sm text-sm font-medium text-white border border-white/40 hover:bg-white/10 transition-colors"
               >
                 Conocé más
               </a>
             </div>
-
-            {/* Trust bullets */}
-            <div className="mt-10 flex flex-wrap gap-x-7 gap-y-3">
-              {["Acceso 24/7", "Cumplimiento BCRA", "Seguridad de grado bancario"].map((t) => (
-                <span key={t} className="inline-flex items-center gap-2 text-sm text-white/65">
+            <div className="mt-9 flex flex-wrap gap-x-6 gap-y-2">
+              {["Acceso 24/7", "Cumplimiento BCRA", "Seguridad bancaria"].map((t) => (
+                <span key={t} className="inline-flex items-center gap-2 text-sm text-white/60">
                   <CheckCircle2 className="w-4 h-4 text-accent" />
                   {t}
                 </span>
-              ))}
-            </div>
-
-            {/* Stats row */}
-            <div className="mt-10 grid grid-cols-3 gap-6 max-w-md border-t border-white/15 pt-8">
-              {stats.map((stat) => (
-                <div key={stat.label}>
-                  <div className="text-2xl lg:text-3xl font-bold text-white">{stat.value}</div>
-                  <div className="mt-1 text-xs text-white/60 tracking-wide">{stat.label}</div>
-                </div>
               ))}
             </div>
           </div>
@@ -103,7 +70,6 @@ const HeroSection = () => {
           <div className="relative hidden lg:block animate-fade-up" style={{ animationDelay: "0.15s" }}>
             <div className="absolute inset-0 bg-accent/20 blur-3xl rounded-3xl" aria-hidden />
             <div className="relative bg-white/10 backdrop-blur-xl border border-white/15 rounded-2xl p-5 shadow-2xl">
-              {/* Browser chrome */}
               <div className="flex items-center gap-3 mb-5">
                 <div className="flex gap-1.5">
                   <div className="w-3 h-3 rounded-full bg-destructive/70" />
@@ -114,8 +80,6 @@ const HeroSection = () => {
                   <span className="text-xs text-white/50">app.tecnomind.com.ar</span>
                 </div>
               </div>
-
-              {/* Dashboard content */}
               <div className="bg-white rounded-xl p-6 space-y-6 text-foreground">
                 <div className="flex items-center justify-between">
                   <div>
@@ -126,8 +90,6 @@ const HeroSection = () => {
                     <span className="text-accent font-semibold">S</span>
                   </div>
                 </div>
-
-                {/* Balance card */}
                 <div className="bg-gradient-to-br from-primary to-primary/80 rounded-xl p-5 text-white">
                   <p className="text-sm opacity-80 mb-1">Saldo disponible</p>
                   <p className="text-3xl font-bold">$ 1.250.400,00</p>
@@ -138,8 +100,6 @@ const HeroSection = () => {
                     </span>
                   </div>
                 </div>
-
-                {/* Stats */}
                 <div className="grid grid-cols-3 gap-3">
                   {[
                     { label: "Ingresos", value: "$ 890k" },
@@ -154,8 +114,6 @@ const HeroSection = () => {
                 </div>
               </div>
             </div>
-
-            {/* Floating chips */}
             <div className="absolute -top-6 -right-4 bg-white rounded-xl shadow-elevated px-4 py-3 flex items-center gap-3 animate-float">
               <div className="w-9 h-9 rounded-full bg-success/15 flex items-center justify-center">
                 <ArrowLeftRight className="w-4 h-4 text-success" />
@@ -176,16 +134,6 @@ const HeroSection = () => {
             </div>
           </div>
         </div>
-      </div>
-
-      {/* Bottom wave */}
-      <div className="absolute bottom-0 left-0 right-0 z-0">
-        <svg viewBox="0 0 1440 120" fill="none" xmlns="http://www.w3.org/2000/svg" className="w-full">
-          <path
-            d="M0 120L60 110C120 100 240 80 360 70C480 60 600 60 720 65C840 70 960 80 1080 85C1200 90 1320 90 1380 90L1440 90V120H1380C1320 120 1200 120 1080 120C960 120 840 120 720 120C600 120 480 120 360 120C240 120 120 120 60 120H0Z"
-            className="fill-background"
-          />
-        </svg>
       </div>
     </section>
   );

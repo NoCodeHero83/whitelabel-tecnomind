@@ -1,7 +1,7 @@
 const RegulatoryStrip = () => {
   return (
     <section className="bg-primary border-t border-white/10 text-white">
-      <div className="container mx-auto px-4 lg:px-8 py-8 md:py-10 flex flex-col md:flex-row gap-6 md:items-center md:justify-between">
+      <div className="max-w-6xl mx-auto px-4 sm:px-6 py-8 md:py-10 flex flex-col md:flex-row gap-6 md:items-center md:justify-between">
         <div className="flex items-center gap-5">
           <div className="border border-accent px-3 py-1.5 text-[0.7rem] tracking-[0.14em] uppercase font-semibold text-accent">
             BCRA

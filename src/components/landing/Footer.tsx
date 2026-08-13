@@ -17,7 +17,7 @@ const Footer = () => {
 
   return (
     <footer id="contacto" className="bg-primary text-white border-t border-white/10">
-      <div className="container mx-auto px-4 lg:px-8 py-16 lg:py-20 grid gap-12 md:grid-cols-2 lg:grid-cols-4">
+      <div className="max-w-6xl mx-auto px-4 sm:px-6 py-16 lg:py-20 grid gap-12 md:grid-cols-2 lg:grid-cols-4">
         {/* Brand */}
         <div className="lg:col-span-1">
           <div className="bg-white inline-flex p-3 rounded-xl">
@@ -102,12 +102,12 @@ const Footer = () => {
 
       {/* Bottom bar */}
       <div className="border-t border-white/10">
-        <div className="container mx-auto px-4 lg:px-8 py-5 flex flex-col md:flex-row gap-3 md:items-center md:justify-between text-[0.7rem] text-white/40">
+        <div className="max-w-6xl mx-auto px-4 sm:px-6 py-5 flex flex-col md:flex-row gap-3 md:items-center md:justify-between text-[0.7rem] text-white/40">
           <div>© 2024 tecnomind. Todos los derechos reservados.</div>
           <div>PSP Autorizado · Marco normativo BCRA</div>
         </div>
         <div className="border-t border-white/5">
-          <div className="container mx-auto px-4 lg:px-8 py-4 text-[0.7rem] text-white/30 leading-relaxed">
+          <div className="max-w-6xl mx-auto px-4 sm:px-6 py-4 text-[0.7rem] text-white/30 leading-relaxed">
             Los fondos depositados no constituyen depósitos en una entidad financiera ni cuentan con la garantía
             de la Ley 24.485.
           </div>
