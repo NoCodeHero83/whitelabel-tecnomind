@@ -1,114 +1,115 @@
 import Logo from "@/components/Logo";
-import { Mail, MapPin, Phone } from "lucide-react";
+import { Mail, MapPin, Phone, ExternalLink } from "lucide-react";
 
 const Footer = () => {
   const links = {
-    producto: [
-      { label: "Billetera Virtual", href: "/login" },
-    ],
-    empresa: [
-      { label: "Nosotros", href: "/about" },
-    ],
-    legal: [
+    util: [
       { label: "Términos y Condiciones", href: "/terms" },
       { label: "Política de Privacidad", href: "/privacy" },
+      { label: "Nosotros", href: "/about" },
+    ],
+    contacto: [
+      { label: "contacto@tecnomind.com.ar", href: "mailto:contacto@tecnomind.com.ar" },
+      { label: "soporte@tecnomind.com.ar", href: "mailto:soporte@tecnomind.com.ar" },
+      { label: "+54 11 5555-0000", href: "tel:+541155550000" },
     ],
   };
 
   return (
-    <footer className="bg-primary text-primary-foreground">
-      <div className="container mx-auto px-4 lg:px-8 py-16 lg:py-20">
-        <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-5 gap-8 lg:gap-12">
-          {/* Brand Column */}
-          <div className="col-span-2 md:col-span-4 lg:col-span-2">
-            <div className="mb-6">
-              <Logo className="[&_span]:text-primary-foreground" />
+    <footer id="contacto" className="bg-primary text-white border-t border-white/10">
+      <div className="container mx-auto px-4 lg:px-8 py-16 lg:py-20 grid gap-12 md:grid-cols-2 lg:grid-cols-4">
+        {/* Brand */}
+        <div className="lg:col-span-1">
+          <div className="bg-white inline-flex p-3 rounded-xl">
+            <Logo className="[&_span]:text-foreground ml-0" />
+          </div>
+          <p className="mt-6 text-sm text-white/50 leading-relaxed max-w-[240px]">
+            La billetera virtual diseñada para emprendedores argentinos. Seguridad, velocidad y las mejores
+            herramientas para tu negocio.
+          </p>
+          <div className="mt-6 space-y-3">
+            <div className="flex items-center gap-3 text-sm text-white/60">
+              <MapPin className="w-4 h-4 text-accent" />
+              <span>Buenos Aires, Argentina</span>
             </div>
-            <p className="text-primary-foreground/70 text-sm leading-relaxed mb-6 max-w-sm">
-              La billetera virtual diseñada para emprendedores argentinos. 
-              Seguridad, velocidad y las mejores herramientas para tu negocio.
-            </p>
-            <div className="space-y-3">
-              <div className="flex items-center gap-3 text-sm text-primary-foreground/60">
-                <MapPin className="w-4 h-4" />
-                <span>Buenos Aires, Argentina</span>
-              </div>
-              <div className="flex items-center gap-3 text-sm text-primary-foreground/60">
-                <Mail className="w-4 h-4" />
-                <span>hola@magnate.com.ar</span>
-              </div>
-              <div className="flex items-center gap-3 text-sm text-primary-foreground/60">
-                <Phone className="w-4 h-4" />
-                <span>+54 11 5555-0000</span>
-              </div>
+            <div className="flex items-center gap-3 text-sm text-white/60">
+              <Mail className="w-4 h-4 text-accent" />
+              <span>contacto@tecnomind.com.ar</span>
             </div>
-          </div>
-
-          {/* Links Columns */}
-          <div>
-            <h4 className="font-semibold text-primary-foreground mb-4">Producto</h4>
-            <ul className="space-y-3">
-              {links.producto.map((link) => (
-                <li key={link.label}>
-                  <a 
-                    href={link.href}
-                    className="text-sm text-primary-foreground/60 hover:text-primary-foreground transition-colors"
-                  >
-                    {link.label}
-                  </a>
-                </li>
-              ))}
-            </ul>
-          </div>
-
-          <div>
-            <h4 className="font-semibold text-primary-foreground mb-4">Empresa</h4>
-            <ul className="space-y-3">
-              {links.empresa.map((link) => (
-                <li key={link.label}>
-                  <a 
-                    href={link.href}
-                    className="text-sm text-primary-foreground/60 hover:text-primary-foreground transition-colors"
-                  >
-                    {link.label}
-                  </a>
-                </li>
-              ))}
-            </ul>
-          </div>
-
-          <div>
-            <h4 className="font-semibold text-primary-foreground mb-4">Legal</h4>
-            <ul className="space-y-3">
-              {links.legal.map((link) => (
-                <li key={link.label}>
-                  <a 
-                    href={link.href}
-                    className="text-sm text-primary-foreground/60 hover:text-primary-foreground transition-colors"
-                  >
-                    {link.label}
-                  </a>
-                </li>
-              ))}
-            </ul>
+            <div className="flex items-center gap-3 text-sm text-white/60">
+              <Phone className="w-4 h-4 text-accent" />
+              <span>+54 11 5555-0000</span>
+            </div>
           </div>
         </div>
 
-        {/* Bottom Bar */}
-        <div className="mt-16 pt-8 border-t border-primary-foreground/10">
-          <div className="flex flex-col md:flex-row justify-between items-center gap-4">
-            <p className="text-sm text-primary-foreground/50">
-              © 2024 tecnomind. Todos los derechos reservados.
-            </p>
-            <div className="flex items-center gap-6">
-              <span className="text-xs text-primary-foreground/40">
-                Regulado por el BCRA
-              </span>
-              <div className="h-4 w-px bg-primary-foreground/20" />
-              <span className="text-xs text-primary-foreground/40">
-                PSP Autorizado
-              </span>
+        {/* Enlaces útiles */}
+        <div>
+          <h4 className="text-xs font-semibold tracking-[0.16em] uppercase text-accent">Enlaces útiles</h4>
+          <ul className="mt-5 space-y-3 text-sm">
+            {links.util.map((link) => (
+              <li key={link.label}>
+                <a href={link.href} className="text-white/70 hover:text-white transition-colors">
+                  {link.label}
+                </a>
+              </li>
+            ))}
+          </ul>
+        </div>
+
+        {/* Contacto */}
+        <div>
+          <h4 className="text-xs font-semibold tracking-[0.16em] uppercase text-accent">Contactanos</h4>
+          <ul className="mt-5 space-y-3 text-sm">
+            {links.contacto.map((link) => (
+              <li key={link.label}>
+                <a href={link.href} className="text-white/70 hover:text-white transition-colors">
+                  {link.label}
+                </a>
+              </li>
+            ))}
+          </ul>
+          <a
+            href="https://www.bcra.gob.ar"
+            target="_blank"
+            rel="noreferrer"
+            className="mt-5 inline-flex items-center gap-1.5 text-xs font-semibold tracking-[0.14em] uppercase text-accent hover:text-white transition-colors"
+          >
+            bcra.gob.ar
+            <ExternalLink className="w-3 h-3" />
+          </a>
+        </div>
+
+        {/* Ente fiscalizador */}
+        <div>
+          <h4 className="text-xs font-semibold tracking-[0.16em] uppercase text-accent">Ente fiscalizador</h4>
+          <div className="mt-5 border border-white/15 rounded-xl p-4 bg-white/5">
+            <div className="text-[0.6rem] tracking-[0.16em] uppercase font-semibold text-accent">BCRA</div>
+            <div className="mt-1.5 text-sm text-white/80 leading-relaxed">
+              Banco Central de la República Argentina
             </div>
+            <a
+              href="https://www.usuariosfinancieros.gob.ar"
+              target="_blank"
+              rel="noreferrer"
+              className="mt-2 inline-block text-[0.6rem] tracking-[0.14em] uppercase font-semibold text-accent hover:text-white transition-colors"
+            >
+              usuariosfinancieros.gob.ar →
+            </a>
+          </div>
+        </div>
+      </div>
+
+      {/* Bottom bar */}
+      <div className="border-t border-white/10">
+        <div className="container mx-auto px-4 lg:px-8 py-5 flex flex-col md:flex-row gap-3 md:items-center md:justify-between text-[0.7rem] text-white/40">
+          <div>© 2024 tecnomind. Todos los derechos reservados.</div>
+          <div>PSP Autorizado · Marco normativo BCRA</div>
+        </div>
+        <div className="border-t border-white/5">
+          <div className="container mx-auto px-4 lg:px-8 py-4 text-[0.7rem] text-white/30 leading-relaxed">
+            Los fondos depositados no constituyen depósitos en una entidad financiera ni cuentan con la garantía
+            de la Ley 24.485.
           </div>
         </div>
       </div>

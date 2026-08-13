@@ -1,95 +1,60 @@
-import { Shield, Building2, Zap } from "lucide-react";
+import { ShieldCheck, Landmark, Zap } from "lucide-react";
+import Eyebrow from "./Eyebrow";
 
 const ValueProps = () => {
   const values = [
     {
-      icon: Shield,
-      title: "Seguridad Total",
-      description: "Acceso protegido por biometría y PIN virtual para máxima tranquilidad. Tus fondos están resguardados con los más altos estándares del mercado.",
-      color: "accent"
+      icon: ShieldCheck,
+      title: "Tecnología Segura",
+      description:
+        "Autenticación por biometría, PIN y OTP, con cifrado de grado bancario para proteger cada acceso y cada operación de tu cuenta.",
     },
     {
-      icon: Building2,
+      icon: Landmark,
       title: "Confianza Institucional",
-      description: "Gestión transparente de fondos y cumplimiento normativo. Operamos bajo todas las regulaciones del BCRA para brindarte total respaldo.",
-      color: "primary"
+      description:
+        "Gestión transparente de fondos bajo el cumplimiento normativo del BCRA y los más altos estándares del mercado.",
     },
     {
       icon: Zap,
       title: "Eficacia Operativa",
-      description: "Transferencias inmediatas a cualquier CBU/CVU y cobros ágiles. Tu dinero se mueve tan rápido como tu negocio lo necesita.",
-      color: "success"
-    }
+      description:
+        "Transferencias inmediatas a cualquier CBU/CVU y cobros ágiles. Tu dinero se mueve tan rápido como tu negocio lo necesita.",
+    },
   ];
 
-  const getColorClasses = (color: string) => {
-    switch (color) {
-      case 'accent':
-        return {
-          bg: 'bg-accent/10',
-          icon: 'text-accent',
-          border: 'group-hover:border-accent/30'
-        };
-      case 'success':
-        return {
-          bg: 'bg-success/10',
-          icon: 'text-success',
-          border: 'group-hover:border-success/30'
-        };
-      default:
-        return {
-          bg: 'bg-primary/10',
-          icon: 'text-primary',
-          border: 'group-hover:border-primary/30'
-        };
-    }
-  };
-
   return (
-    <section id="seguridad" className="py-24 lg:py-32 bg-background">
-      <div className="container mx-auto px-4 lg:px-8">
-        {/* Section Header */}
-        <div className="text-center max-w-3xl mx-auto mb-16 lg:mb-20">
-          <span className="inline-block text-sm font-semibold text-accent uppercase tracking-wider mb-4">
-            Nuestra propuesta
-          </span>
-          <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-foreground mb-6">
-            Los pilares de una billetera de clase mundial
-          </h2>
-          <p className="text-lg text-muted-foreground">
-            Diseñada para emprendedores que exigen lo mejor: seguridad sin compromisos, 
-            confianza institucional y la velocidad que tu negocio necesita.
+    <section id="seguridad" className="relative overflow-hidden py-24 lg:py-32 bg-background">
+      <div className="absolute top-[15%] -right-[8%] w-[420px] h-[420px] rounded-full bg-success/10 blur-[90px] pointer-events-none" aria-hidden />
+      <div className="relative container mx-auto px-4 lg:px-8">
+        {/* Section header */}
+        <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-6 mb-14 lg:mb-16">
+          <div>
+            <Eyebrow>Diferenciales</Eyebrow>
+            <h2 className="mt-4 text-3xl md:text-4xl lg:text-5xl font-bold text-foreground tracking-tight">
+              ¿Por qué elegirnos?
+            </h2>
+          </div>
+          <p className="md:max-w-sm text-sm text-muted-foreground leading-relaxed">
+            Tres pilares que definen la forma en la que trabajamos y nos diferencian del resto del sector.
           </p>
         </div>
 
-        {/* Value Cards */}
-        <div className="grid md:grid-cols-3 gap-8">
-          {values.map((value, index) => {
-            const colors = getColorClasses(value.color);
-            return (
-              <div
-                key={value.title}
-                className={`group relative bg-card rounded-2xl p-8 border border-border transition-all duration-300 hover:shadow-elevated hover:-translate-y-1 ${colors.border}`}
-                style={{ animationDelay: `${index * 0.1}s` }}
-              >
-                {/* Icon */}
-                <div className={`w-14 h-14 rounded-xl ${colors.bg} flex items-center justify-center mb-6`}>
-                  <value.icon className={`w-7 h-7 ${colors.icon}`} />
-                </div>
-
-                {/* Content */}
-                <h3 className="text-xl font-semibold text-foreground mb-3">
-                  {value.title}
-                </h3>
-                <p className="text-muted-foreground leading-relaxed">
-                  {value.description}
-                </p>
-
-                {/* Decorative gradient */}
-                <div className="absolute inset-x-0 bottom-0 h-1 rounded-b-2xl bg-gradient-to-r from-transparent via-accent/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+        {/* Values grid */}
+        <div className="grid md:grid-cols-3 gap-6">
+          {values.map(({ icon: Icon, title, description }) => (
+            <article
+              key={title}
+              className="group relative bg-card rounded-2xl border border-border border-t-2 border-t-primary p-8 transition-all duration-300 hover:-translate-y-1 hover:shadow-elevated"
+            >
+              <div className="w-[52px] h-[52px] rounded-full bg-primary/10 border border-primary/15 flex items-center justify-center group-hover:bg-primary transition-colors duration-300">
+                <Icon className="w-6 h-6 text-primary group-hover:text-primary-foreground transition-colors duration-300" strokeWidth={1.6} />
               </div>
-            );
-          })}
+              <h3 className="mt-6 text-xl font-semibold text-foreground leading-tight">{title}</h3>
+              <div className="h-px bg-accent w-8 my-4" />
+              <p className="text-sm text-muted-foreground leading-relaxed">{description}</p>
+            </article>
+          ))}
         </div>
       </div>
     </section>

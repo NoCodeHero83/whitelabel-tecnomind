@@ -1,5 +1,10 @@
 export { default as Navbar } from './Navbar';
 export { default as HeroSection } from './HeroSection';
-export { default as ValueProps } from './ValueProps';
+export { default as TrustStrip } from './TrustStrip';
 export { default as SolutionsSection } from './SolutionsSection';
+export { default as CapabilitiesSection } from './CapabilitiesSection';
+export { default as MisionVisionSection } from './MisionVisionSection';
+export { default as ValueProps } from './ValueProps';
+export { default as RegulatoryStrip } from './RegulatoryStrip';
 export { default as Footer } from './Footer';
+export { default as Eyebrow } from './Eyebrow';
