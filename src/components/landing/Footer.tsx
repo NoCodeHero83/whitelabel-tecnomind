@@ -98,7 +98,7 @@ const Footer = () => {
         <div className="mt-16 pt-8 border-t border-primary-foreground/10">
           <div className="flex flex-col md:flex-row justify-between items-center gap-4">
             <p className="text-sm text-primary-foreground/50">
-              © 2024 Magnate. Todos los derechos reservados.
+              © 2024 tecnomind. Todos los derechos reservados.
             </p>
             <div className="flex items-center gap-6">
               <span className="text-xs text-primary-foreground/40">

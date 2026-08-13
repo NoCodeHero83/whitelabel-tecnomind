@@ -1,5 +1,5 @@
 /**
- * Constantes globales de la aplicación Magnate
+ * Constantes globales de la aplicación tecnomind
  */
 
 // Autenticación y seguridad

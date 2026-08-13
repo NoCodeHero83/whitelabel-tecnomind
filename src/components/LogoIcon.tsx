@@ -3,7 +3,7 @@ interface LogoIconProps {
 }
 
 /**
- * Isotipo SVG de Magnate - Letra M con flecha de crecimiento
+ * Isotipo SVG de tecnomind - Letra M con flecha de crecimiento
  */
 const LogoIcon = ({ className = "h-14 w-14" }: LogoIconProps) => {
   return (

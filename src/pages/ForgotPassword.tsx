@@ -60,7 +60,7 @@ const ForgotPassword = () => {
           <div className="flex items-center gap-2 flex-1 justify-center pr-7">
             <LogoIcon className="h-8 w-8" />
             <h1 className="text-foreground text-xl font-bold leading-tight tracking-[-0.015em]">
-              Magnate
+              tecnomind
             </h1>
           </div>
         </header>

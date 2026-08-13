@@ -102,7 +102,7 @@ const Login = () => {
         <header className="flex items-center bg-card p-4 pb-2 justify-between border-b border-border">
           <LogoIcon className="h-10 w-10" />
           <h1 className="text-foreground text-xl font-bold leading-tight tracking-[-0.015em] flex-1 text-center pr-10">
-            Magnate
+            tecnomind
           </h1>
         </header>
 

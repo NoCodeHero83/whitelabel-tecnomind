@@ -17,7 +17,7 @@ const Logo = ({ className = "h-12", showText = true }: LogoProps) => {
 
       {showText && (
         <span className="text-2xl font-semibold tracking-tight text-foreground">
-          Magnate
+          tecnomind
         </span>
       )}
     </a>

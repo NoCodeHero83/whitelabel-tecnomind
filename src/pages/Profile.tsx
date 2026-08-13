@@ -144,7 +144,7 @@ const Profile = () => {
             Cerrar Sesión
           </button>
           <p className="text-center text-xs text-muted-foreground mt-4 font-mono">
-            Magnate v2.4.0 (Build 892) • Enterprise Grade Security
+            tecnomind v2.4.0 (Build 892) • Enterprise Grade Security
           </p>
         </div>
       </div>
