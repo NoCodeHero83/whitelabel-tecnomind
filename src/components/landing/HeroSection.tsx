@@ -1,32 +1,43 @@
 import { ArrowRight, CheckCircle2, TrendingUp, ArrowLeftRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { useNavigate } from "react-router-dom";
+import fondoHero from "@/assets/tecnomind-fondo.jpg";
 
 const HeroSection = () => {
   const navigate = useNavigate();
 
+  const stats = [
+    { value: "+150.000", label: "Operaciones mensuales" },
+    { value: "24/7", label: "Disponibilidad" },
+    { value: "100%", label: "Plataforma digital" },
+  ];
+
   return (
     <section className="relative min-h-screen overflow-hidden bg-primary">
-      {/* Base gradient */}
-      <div className="absolute inset-0 gradient-hero" aria-hidden />
+      {/* Fondo tecnomind optimizado */}
+      <img
+        src={fondoHero}
+        alt=""
+        aria-hidden
+        className="absolute inset-0 h-full w-full object-cover object-center"
+        loading="eager"
+        fetchPriority="high"
+        decoding="async"
+      />
 
-      {/* Grid pattern */}
-      <div className="absolute inset-0 opacity-[0.04]" aria-hidden>
-        <div
-          className="absolute inset-0"
-          style={{
-            backgroundImage: `radial-gradient(circle at 1px 1px, white 1px, transparent 0)`,
-            backgroundSize: "36px 36px",
-          }}
-        />
-      </div>
+      {/* Overlay para asegurar contraste de textos */}
+      <div
+        className="absolute inset-0 bg-[linear-gradient(180deg,rgba(10,37,64,0.86)_0%,rgba(10,37,64,0.72)_45%,rgba(10,37,64,0.9)_100%)]"
+        aria-hidden
+      />
+      <div
+        className="absolute inset-0 bg-[linear-gradient(120deg,rgba(10,37,64,0.9)_30%,rgba(10,37,64,0.35)_100%)]"
+        aria-hidden
+      />
 
       {/* Glow orbs */}
       <div className="absolute -top-24 right-[8%] w-[520px] h-[520px] rounded-full bg-accent/20 blur-[110px]" aria-hidden />
       <div className="absolute -bottom-32 -left-24 w-[480px] h-[480px] rounded-full bg-success/15 blur-[110px]" aria-hidden />
-
-      {/* Vignette */}
-      <div className="absolute inset-0 bg-[linear-gradient(to_bottom,rgba(10,37,64,0.1),rgba(10,37,64,0.65))] pointer-events-none" aria-hidden />
 
       <div className="container relative z-10 mx-auto px-4 lg:px-8 pt-36 lg:pt-44 pb-24 lg:pb-32">
         <div className="grid lg:grid-cols-2 gap-14 lg:gap-20 items-center">
@@ -43,7 +54,7 @@ const HeroSection = () => {
               La infraestructura financiera que tu negocio merece.
             </h1>
 
-            <p className="mt-6 max-w-xl text-lg md:text-xl text-white/70 leading-relaxed">
+            <p className="mt-6 max-w-xl text-lg md:text-xl text-white/75 leading-relaxed">
               Gestioná cobros, pagos y transferencias con la mayor velocidad del mercado.
               Una plataforma robusta y segura, diseñada para la agilidad de los emprendedores argentinos.
             </p>
@@ -70,10 +81,20 @@ const HeroSection = () => {
             {/* Trust bullets */}
             <div className="mt-10 flex flex-wrap gap-x-7 gap-y-3">
               {["Acceso 24/7", "Cumplimiento BCRA", "Seguridad de grado bancario"].map((t) => (
-                <span key={t} className="inline-flex items-center gap-2 text-sm text-white/60">
+                <span key={t} className="inline-flex items-center gap-2 text-sm text-white/65">
                   <CheckCircle2 className="w-4 h-4 text-accent" />
                   {t}
                 </span>
+              ))}
+            </div>
+
+            {/* Stats row */}
+            <div className="mt-10 grid grid-cols-3 gap-6 max-w-md border-t border-white/15 pt-8">
+              {stats.map((stat) => (
+                <div key={stat.label}>
+                  <div className="text-2xl lg:text-3xl font-bold text-white">{stat.value}</div>
+                  <div className="mt-1 text-xs text-white/60 tracking-wide">{stat.label}</div>
+                </div>
               ))}
             </div>
           </div>

@@ -1,9 +1,20 @@
 import { Target, Compass } from "lucide-react";
 import Eyebrow from "./Eyebrow";
+import fondoHero from "@/assets/tecnomind-fondo.jpg";
 
 const MisionVisionSection = () => {
   return (
     <section className="relative overflow-hidden bg-primary text-white">
+      {/* Fondo tecnomind optimizado */}
+      <img
+        src={fondoHero}
+        alt=""
+        aria-hidden
+        className="absolute inset-0 h-full w-full object-cover object-center"
+        loading="lazy"
+        decoding="async"
+      />
+      <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(10,37,64,0.92)_0%,rgba(10,37,64,0.82)_100%)]" aria-hidden />
       <div className="absolute -top-[20%] left-[40%] w-[640px] h-[640px] rounded-full bg-accent/10 blur-[110px] pointer-events-none" aria-hidden />
       <div className="absolute -bottom-[30%] -right-[10%] w-[480px] h-[480px] rounded-full bg-success/10 blur-[110px] pointer-events-none" aria-hidden />
 

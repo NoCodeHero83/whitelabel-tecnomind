@@ -2,6 +2,7 @@ export { default as Navbar } from './Navbar';
 export { default as HeroSection } from './HeroSection';
 export { default as TrustStrip } from './TrustStrip';
 export { default as SolutionsSection } from './SolutionsSection';
+export { default as StepsSection } from './StepsSection';
 export { default as CapabilitiesSection } from './CapabilitiesSection';
 export { default as MisionVisionSection } from './MisionVisionSection';
 export { default as ValueProps } from './ValueProps';
